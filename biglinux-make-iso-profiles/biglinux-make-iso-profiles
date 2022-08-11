@@ -234,7 +234,7 @@ restore-backup () {
     sudo rm -r /usr/lib/manjaro-tools
     sudo mv /usr/lib/manjaro-tools-backup  /usr/lib/manjaro-tools
     sudo rm -r /usr/share/manjaro-tools
-sudo mv /usr/share/manjaro-tools-backup  /usr/share/manjaro-tools
+    sudo mv /usr/share/manjaro-tools-backup  /usr/share/manjaro-tools
 }
 
 usage()
@@ -281,8 +281,9 @@ elif [ "$1" = "buildlocal" -a -n "$2" -a -n "$3" ];then
     buildiso -f -p biglinux -b $2 -k linux${1}
     restore-backup
 elif [ "$1" = "ci/cd" ];then
-    config-buildiso
+    make-iso-profiles
     copy
+    config-buildiso
 else
 	usage
 fi
