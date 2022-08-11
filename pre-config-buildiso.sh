@@ -2,10 +2,6 @@
 
 
 ## changes in /usr/lib/manjaro-tools/  START ##
-if [ -z $(grep /usr/share/man /usr/lib/manjaro-tools/util-iso-image.sh) ];then
-    # Disable remove pkgs cache
-    sudo sed -i 's|path=$1/var/lib/pacman/sync|path=$1/usr/share/man|'g /usr/lib/manjaro-tools/util-iso-image.sh
-fi
 if [ -z $(grep BigLinux /usr/lib/manjaro-tools/util-iso-image.sh) ];then
     # Remove last } in /usr/lib/manjaro-tools/util-iso-image.sh
     sudo sed -i ':a;$!{N;ba;};s/\(.*\)}/\1/' /usr/lib/manjaro-tools/util-iso-image.sh
@@ -107,6 +103,3 @@ fi
 # sudo sed -i 's|-Xcompression-level 20|-Xcompression-level 6|g' ~/make-iso-files-tmp/manjaro-tools/util-iso.sh
 # ## remove in final version END ##
 
-
-#Build ISO
-# buildiso -f -p biglinux -b stable -k linux515
