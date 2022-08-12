@@ -10,7 +10,7 @@ make-iso-profiles () {
     # clone or Update git
     if [ ! -d "$workdir/$isoprofilesdir" ]
     then
-        git clone https://gitlab.manjaro.org/profiles-and-settings/iso-profiles.git $PWD/$isoprofilesdir
+        git clone https://gitlab.manjaro.org/profiles-and-settings/iso-profiles.git $workdir/$isoprofilesdir
     else
         cd $workdir/$isoprofilesdi
         git pull
@@ -264,12 +264,15 @@ Commands:
 if [ -z "$1" ]; then
     usage
 elif [ -n "$(grep -s amber $@)" ]; then
-    echo 'mesa-amber
-lib32-mesa-amber' >> $isoprofilesdir/community/biglinux/Packages-Root
+    echo '
+    mesa-amber
+lib32-mesa-amber' >> $workdir/$isoprofilesdir/community/biglinux/Packages-Root
     echo "using mesa-amber"
 elif [ -n "$(grep -s mesa-git $@)" ]; then ]
-    echo 'mesa-git
-lib32-mesa-git' >> $isoprofilesdir/community/biglinux/Packages-Root
+    echo '
+    mesa-git
+lib32-mesa-git' >> $workdir/$isoprofilesdir/community/biglinux/Packages-Root
+    echo "using mesa-git"
 fi
 
 if [ "$1" = makeprofiles ]; then
