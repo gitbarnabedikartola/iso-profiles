@@ -5,6 +5,7 @@ isoprofilesdir=iso-profiles
 makeisoprofilesdir=base
 rootdir=..
 mesa=$@
+extrarepos=$@
 
 make-iso-profiles () {
     # clone or Update git
@@ -108,15 +109,22 @@ make-iso-profiles () {
     
     # use mesa-amber or mesa-git?
     if [ -n "$(echo $mesa | grep -s amber )" ]; then
-    echo '
+        echo '
 mesa-amber
 lib32-mesa-amber' >> $workdir/$isoprofilesdir/community/biglinux/Packages-Root
-    echo "using mesa-amber"
+        echo "using mesa-amber"
     elif [ -n "$(echo $mesa | grep -s mesa-git)" ]; then
-    echo '
+        echo '
 mesa-git
 lib32-mesa-git' >> $workdir/$isoprofilesdir/community/biglinux/Packages-Root
-    echo "using mesa-git"
+        echo "using mesa-git"
+    fi
+    
+    if [ "$extrarepo" = "testing" ];then
+        echo '
+        [biglinux-testing]
+        SigLevel = PackageRequired
+        Server = https://repo.biglinux.com.br/testing/$arch' | sudo tee -a $workdir/$isoprofilesdir/community/biglinux/user-repos.conf
     fi
 }
     
@@ -134,7 +142,7 @@ copy() {
 
 config-buildiso () {
     ## changes in /usr/lib/manjaro-tools/  START ##
-    if [ -z $(grep BigLinux /usr/lib/manjaro-tools/util-iso-image.sh) ];then
+    if [ -z "$(grep BigLinux /usr/lib/manjaro-tools/util-iso-image.sh)" ];then
         # Remove last } in /usr/lib/manjaro-tools/util-iso-image.sh
         sudo sed -i ':a;$!{N;ba;};s/\(.*\)}/\1/' /usr/lib/manjaro-tools/util-iso-image.sh
         # adicionar ao arquivo /usr/lib/manjaro-tools/util-iso-image.sh
