@@ -263,12 +263,12 @@ Commands:
 # # use mesa-amber ?
 if [ -z "$1" ]; then
     usage
-elif [ -n "$(grep -s amber $@)" ]; then
+elif [ -n "$(echo $@ | grep -s amber )" ]; then
     echo '
     mesa-amber
 lib32-mesa-amber' >> $workdir/$isoprofilesdir/community/biglinux/Packages-Root
     echo "using mesa-amber"
-elif [ -n "$(grep -s mesa-git $@)" ]; then ]
+elif [ -n "$(echo $@ | grep -s mesa-git)" ]; then ]
     echo '
     mesa-git
 lib32-mesa-git' >> $workdir/$isoprofilesdir/community/biglinux/Packages-Root
