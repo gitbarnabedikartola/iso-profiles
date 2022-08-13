@@ -118,7 +118,7 @@ lib32-mesa-amber' >> $workdir/$isoprofilesdir/community/biglinux/Packages-Root
 mesa-git
 lib32-mesa-git' >> $workdir/$isoprofilesdir/community/biglinux/Packages-Root
         echo "using mesa-git"
-        sed '/lib32-libva-mesa-driver/d'  $workdir/$isoprofilesdir/community/biglinux/Packages-Desktop
+        sed -i '/lib32-libva-mesa-driver/d'  $workdir/$isoprofilesdir/community/biglinux/Packages-Desktop
     fi
     
     if [ -n "$(echo $extrarepo | grep -s testing)" ];then
