@@ -105,7 +105,19 @@ make-iso-profiles () {
     sed -n '/## Xorg Input Drivers/,/^$/p'  $workdir/$isoprofilesdir/manjaro/kde/Packages-Desktop  >>  $workdir/$isoprofilesdir/community/biglinux/Packages-Desktop
     sed -n '/## Misc/,/^$/p'  $workdir/$isoprofilesdir/manjaro/kde/Packages-Desktop  >>  $workdir/$isoprofilesdir/community/biglinux/Packages-Desktop
     sed -i 's|xf86-input-void||g'  $workdir/$isoprofilesdir/community/biglinux/Packages-Desktop
-    }
+
+    if [ -n "$(echo $@ | grep -s amber )" ]; then
+    echo '
+    mesa-amber
+lib32-mesa-amber' >> $workdir/$isoprofilesdir/community/biglinux/Packages-Root
+    echo "using mesa-amber"
+    elif [ -n "$(echo $@ | grep -s mesa-git)" ]; then
+    echo '
+    mesa-git
+lib32-mesa-git' >> $workdir/$isoprofilesdir/community/biglinux/Packages-Root
+    echo "using mesa-git"
+    fi
+}
     
 #move iso-files to root dir
 move() {
@@ -260,19 +272,11 @@ Commands:
 	error_exit "$*"
 }
 
-# # use mesa-amber ?
+# # use mesa-amber or mesa-git?
 if [ -z "$1" ]; then
     usage
-elif [ -n "$(echo $@ | grep -s amber )" ]; then
-    echo '
-    mesa-amber
-lib32-mesa-amber' >> $workdir/$isoprofilesdir/community/biglinux/Packages-Root
-    echo "using mesa-amber"
-elif [ -n "$(echo $@ | grep -s mesa-git)" ]; then ]
-    echo '
-    mesa-git
-lib32-mesa-git' >> $workdir/$isoprofilesdir/community/biglinux/Packages-Root
-    echo "using mesa-git"
+elif [ -z "$(echo $@ | egrep "makeprofiles|ci/cd|buildlocal" ]
+    usage
 fi
 
 if [ "$1" = makeprofiles ]; then
