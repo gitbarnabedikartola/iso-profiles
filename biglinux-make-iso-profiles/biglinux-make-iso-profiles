@@ -5,7 +5,7 @@ isoprofilesdir=iso-profiles
 makeisoprofilesdir=base
 rootdir=..
 mesa=$@
-extrarepos=$@
+extrarepo=$@
 
 make-iso-profiles () {
     # clone or Update git
