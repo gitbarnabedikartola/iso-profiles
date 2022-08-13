@@ -120,7 +120,7 @@ lib32-mesa-git' >> $workdir/$isoprofilesdir/community/biglinux/Packages-Root
         echo "using mesa-git"
     fi
     
-    if [ "$extrarepo" = "testing" ];then
+    if [ -n "$(echo $extrarepo | grep -s tesing)" ];then
         echo '
         [biglinux-testing]
         SigLevel = PackageRequired
