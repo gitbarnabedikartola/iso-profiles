@@ -121,11 +121,6 @@ lib32-mesa-git' >> $workdir/$isoprofilesdir/community/biglinux/Packages-Root
         sed -i '/libva-mesa/d'  $workdir/$isoprofilesdir/community/biglinux/Packages-Desktop
         sed -i '/libva-mesa/d'  $workdir/$isoprofilesdir/community/biglinux/Packages-Mhwd
         sed -i '/vulkan-swrast/d'  $workdir/$isoprofilesdir/community/biglinux/Packages-Desktop
-        
-        vulkan-swrast
-        
-        
-        
     fi
     
     if [ -n "$(echo $extrarepo | grep -s testing)" ];then
