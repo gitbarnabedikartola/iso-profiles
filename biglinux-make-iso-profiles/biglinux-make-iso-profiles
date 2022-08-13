@@ -275,7 +275,7 @@ Commands:
 # # use mesa-amber or mesa-git?
 if [ -z "$1" ]; then
     usage
-elif [ -z "$(echo $@ | egrep "makeprofiles|ci/cd|buildlocal" ]
+elif [ -z "$(echo $@ | egrep "makeprofiles|ci/cd|buildlocal")" ];then
     usage
 fi
 
